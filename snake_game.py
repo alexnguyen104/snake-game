@@ -22,6 +22,7 @@ score = 0
 
 
 class Snake:
+    # First three block of snake's body
     snake_body = [[0, 0], [25, 0], [50, 0]]
     default_x = 0
     default_y = 0
@@ -34,7 +35,6 @@ class Snake:
 class Food:
     foodx = round(random.randrange(0, s_width - 25) / 25.0) * 25.0
     foody = round(random.randrange(0, s_height - 25) / 25.0) * 25.0
-
     def food_providing(self):
         pygame.draw.rect(screen, RED, [self.foodx, self.foody, 25, 25])
 
@@ -50,7 +50,6 @@ count = 0
 
 # Initialize the snake
 snake = Snake(snake_block=25, snake_speed=10)
-
 # Initialize the food
 food = Food()
 
@@ -88,6 +87,8 @@ while not game_over:
         for j in range(1, int(s_width/snake.snake_block), 2):
             pygame.draw.rect(
                 screen, GRAY, [j*25, i, snake.snake_block, snake.snake_block])
+
+
 
     pygame.display.update()
     clock.tick(snake.snake_speed)
