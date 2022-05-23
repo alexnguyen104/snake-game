@@ -15,10 +15,6 @@ DARK_GREEN = (3, 110, 1)
 RED = (255, 0, 0)
 GRAY = (181, 181, 181)
 
-y1 = 0
-x1 = 0
-x1_change = 0
-y1_change = 0
 score = 0
 
 
@@ -72,22 +68,19 @@ while not game_over:
         if event.type == pygame.KEYDOWN:
             count += 1
             if event.key == pygame.K_LEFT:
-                x1_change = -25
-                y1_change = 0
+                snake.direction = "left"
             elif event.key == pygame.K_RIGHT:
-                x1_change = 25
-                y1_change = 0
+                snake.direction = "right"
             elif event.key == pygame.K_UP:
-                y1_change = -25
-                x1_change = 0
+                snake.direction = "up"
             elif event.key == pygame.K_DOWN:
-                y1_change = 25
-                x1_change = 0
+                snake.direction = "down"
 
-    x1 += x1_change
-    y1 += y1_change
+    
+    # if(snake.direction == "left"):
+
     screen.fill([255, 255, 255])
-
+    print(snake.direction)
     # Draw the map
     for i in range(0, s_width, 50):
         for j in range(0, int(s_width/snake.block), 2):
