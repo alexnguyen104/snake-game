@@ -72,8 +72,8 @@ def lose_game(score):
     # Let the function know that game_over is a global variable
     global game_over
     print("You are lose!!!")
-    print("Your score is: " + str(score))
     game_over = True
+    print("Your final score: " + str(score))
 
 # Initialize the snake
 block_default = 25
@@ -135,6 +135,7 @@ while not game_over:
     # Check if the snake eats food
     if food.is_eaten(snake.x, snake.y):
         snake.score += 1
+        print("Your Score: " + str(snake.score))
         # Set x and y of food again to change its position
         food.x = round(random.randrange(0, s_width - snake.block) / snake.block) * snake.block
         food.y = round(random.randrange(0, s_height - snake.block) / snake.block) * snake.block  
