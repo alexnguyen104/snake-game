@@ -50,6 +50,10 @@ class Snake:
                 return False
         return True
 
+    def increase_length(self):
+        # Increase one block at the back (the snake's body is removed by one block at the back and increased by one block in the front per frame in order to create movement, so the new block should be should be the current last block)
+        self.body.insert(0,self.body[0])
+
 class Food:
     def __init__(self, block):
         self.x = round(random.randrange(0, s_width - block) / block) * block
@@ -134,12 +138,14 @@ while not game_over:
 
     # Check if the snake eats food
     if food.is_eaten(snake.x, snake.y):
-        snake.score += 1
-        print("Your Score: " + str(snake.score))
+        snake.increase_length()
+
         # Set x and y of food again to change its position
         food.x = round(random.randrange(0, s_width - snake.block) / snake.block) * snake.block
         food.y = round(random.randrange(0, s_height - snake.block) / snake.block) * snake.block  
-    
+
+        snake.score += 1        
+        print("Your Score: " + str(snake.score))
     # Check if the snake have touched borders
     if snake.check_border():
         lose_game(snake.score)
