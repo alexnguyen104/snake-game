@@ -1,5 +1,6 @@
 import pygame
 import random
+import time
 
 pygame.init()
 
@@ -53,6 +54,13 @@ class Snake:
     def increase_length(self):
         # Increase one block at the back (the snake's body is removed by one block at the back and increased by one block in the front per frame in order to create movement, so the new block should be should be the current last block)
         self.body.insert(0,self.body[0])
+    
+    def is_hit(self):
+        for i in range(len(self.body)-1):
+            if [self.x, self.y] == self.body[i]:
+                print(self.body[i])
+                return True
+        return False
 
 class Food:
     def __init__(self, block):
@@ -75,9 +83,10 @@ class Food:
 def lose_game(score):
     # Let the function know that game_over is a global variable
     global game_over
-    print("You are lose!!!")
     game_over = True
+    print("You are lose!!!")
     print("Your final score: " + str(score))
+    time.sleep(0.5)
 
 # Initialize the snake
 block_default = 25
@@ -146,9 +155,15 @@ while not game_over:
 
         snake.score += 1        
         print("Your Score: " + str(snake.score))
+
     # Check if the snake have touched borders
     if snake.check_border():
         lose_game(snake.score)
+
+    # Check if the snake hits itself
+    if snake.is_hit():
+        lose_game(snake.score) 
+
 
     # Update changes and set snake's speed
     pygame.display.update()
